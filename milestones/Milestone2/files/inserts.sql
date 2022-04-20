@@ -11,49 +11,70 @@ INSERT INTO GeneralUser (general_user_id, name, email, ssn, address)
 VALUES
 (1, "Steph Curry", "splashfather@gmail.com", 1, "1 Warriors Way"),
 (2, "Samuel L. Jackson", "imMaceWindu@yahoo.com", 2, "124 Coruscant St"),
-(3, "Will Smith", "catchThemHands@oscars.com", 3, "2 Academy Place");
+(3, "Will Smith", "catchThemHands@oscars.com", 3, "2 Academy Place"),
+(4, "Rose Park", "rosesarerosie@gmail.com", 4, "397 Hapjeong"), 
+(5, "Ed Sheeran", "edSheeran@yahoo.com", 5, "37 Red Ave"), 
+(6, "Mikasa Ackerman", "mackerman@outlook.com", 6,  "572 Island Way"),
+(7, "Trevor Grant", "trevG@gmail.com", 7, "732 Belmont St"),
+(8, "Jordan Poole", "pooleparty@yahoo.com", 8,  "2 Warriors Way"),
+(9, "Draymond Green", "iShouldHaveBeenDPOY@gmail.com", 9, "3 Warriors Way"),
+(10, "Klay Thompson", "toasterKlay@yahoo.com", 10, "4 Warriors Way");
 
 INSERT INTO BankAccount (bank_account_id, bank_id, general_user_id, account_number)
 VALUES
 (1, 1, 1, 1),
 (2, 2, 2, 2),
-(3, 3, 3, 3);
+(3, 3, 3, 3),
+(4, 3, 4, 4),
+(5, 2, 5, 5),
+(6, 1, 6, 6),
+(7, 3, 7, 7),
+(8, 2, 8, 8),
+(9, 1, 9, 9),
+(10, 3, 10, 10);
 
 INSERT INTO CheckingAccount(checking_account_id, bank_account_id, balance, fees)
 VALUES
 (1, 1, 100, 0),
 (2, 2, 400, 1),
-(3, 3, 100000, 4);
+(3, 3, 100000, 4),
+(4, 4, 62413, 0),
+(5, 5, 54, 1);
 
 INSERT INTO SavingsAccount(savings_account_id, bank_account_id, balance, interest_rate)
 VALUES
 (1, 1, 3000, 2),
 (2, 2, 5234, 3),
-(3, 3, 45301, 1);
+(3, 3, 45301, 1),
+(4, 4, 3214, 0);
 
 INSERT INTO Owner (owner_id, name, last_name)
 VALUES
 (42, "Harrison Wells", "Fargo"),
 (5321, "Chase Samuel", "McLaughlin"),
-(73261, "Westly Van", "Duke");
+(73261, "Westly Van", "Duke"),
+(312, "Bills",  "McBillington");
 
 INSERT INTO Owns (owns_id, bank_id, owner_id)
 VALUES
 (1, 1, 42),
 (2, 2, 5321),
-(3, 3, 73261);
+(3, 3, 73261),
+(4, 3, 312);
 
 INSERT INTO Affiliate (affiliate_id, name, contract)
 VALUES
 (42027, "Selena Gomez", "$5000 for each appearance/commercial"),
 (3011, "Ewan McGregor", "$2500 for each appearance/commercial"),
-(7, "Jeremy Lin", "$1000 for each appearance/commercial");
+(7, "Jeremy Lin", "$1000 for each appearance/commercial"),
+(674, "Irene Bae", "$3500 for each appearance/commercial");
 
 INSERT INTO Affiliations (affiliation_id, affiliate_id, bank_id)
 VALUES
 (1, 42027, 1),
 (2, 3011, 2),
-(3, 7, 3);
+(3, 7, 3),
+(4, 674, 3);
 
 INSERT INTO Employee (employee_id, name, email, bank_id, isAdmin)
 VALUES
@@ -111,25 +132,29 @@ INSERT INTO Permissions (permissions_id, admin_id, type, bank_account_id)
 VALUES
 (1, 1, "Access Loans", 1),
 (2, 2, "Access Checking Account", 1),
-(3, 3, "Access Savings Account", 2);
+(3, 3, "Access Savings Account", 2),
+(4, 4, "No permissions", 3);
 
 INSERT INTO Manages (manage_id, admin_id, permission_id)
 VALUES
 (1, 1, 1), 
 (2, 2, 2),
-(3, 3, 3);
+(3, 3, 3),
+(4, 4, 4);
 
 INSERT INTO AccountPermissions(account_perm_id, bank_account_id, permission_id)
 VALUES
 (1, 1, 1),
 (2, 2, 2),
-(3, 3, 3);
+(3, 3, 3),
+(4, 4, 4);
 
 INSERT INTO Manufacturer (manufacturer_id, name, address)
 VALUES
 (1, "LG Display", "2 LG Way"),
 (2, "Sony LLD", "500 Industrial Way"),
-(3, "Samsan Tech", "324 Startup Ave");
+(3, "Samsan Tech", "324 Startup Ave"),
+(4, "TechEverything", "653 Expanse Way");
 
 INSERT INTO SecurityAlarm(security_alarm_id, manufacturer_id, alarm_range)
 VALUES
@@ -180,7 +205,8 @@ INSERT INTO Speaker(speaker_id, manufacturer_id, status, device_id)
 VALUES
 (1, 2, "Working", 2),
 (2, 2, "Not working", 2),
-(3, 2, "Working", 2);
+(3, 2, "Working", 2),
+(4, 1, "Working", 4);
 
 INSERT INTO CardReader(card_reader_id, manufacturer_id, status, device_id)
 VALUES
@@ -228,7 +254,9 @@ INSERT INTO VerifiedUser (verified_user_id, general_user_id, privileges, oled_sc
 VALUES
 (1, 1, 4, 1, 1),
 (2, 2, 3, 2, 2),
-(3, 3, 5, 3, 3);
+(3, 3, 5, 3, 3),
+(4, 8, 3, 1, 1),
+(5, 9, 2, 1, 1);
 
 INSERT INTO VerifiedDevices (verified_devices_id, verified_user_id, device_type)
 VALUES
@@ -240,7 +268,9 @@ INSERT INTO Notifications (notification_id, message, timestamp, verified_device_
 VALUES
 (1, "Account has been temporarily locked out", now(), 1, 1),
 (2, "Account has been deducted $100", now(), 1, 2),
-(3, "Account has paid off this month's balance", now(), 2, 2);
+(3, "Account has paid off this month's balance", now(), 2, 2),
+(4, "Account has been logged into", now(), 4, 2),
+(5, "Account has been terminated", now(), 5, 2);
 
 INSERT INTO Received(received_id, verified_device_id, notification_id)
 VALUES
