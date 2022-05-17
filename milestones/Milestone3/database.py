@@ -85,7 +85,8 @@ def response(msg):
         db_response = get_verifications(date)
         return db_response
     elif "/get_contracts" in bot_command:
-        db_response = get_contracts()
+        bank_id = command_parts[1]
+        db_response = get_contracts(bank_id)
         return db_response
     elif "/bank_loan_terms" in bot_command:
         bank_id = command_parts[1]
@@ -509,15 +510,16 @@ def get_verifications(date):
         print("help")
         return results
 
-def get_contracts():
+def get_contracts(bank_id):
     results = None
     try:
         connection = connect()
         if connection:
             cursor = connection.cursor()
-            query = ("""SELECT Bank.name, Affiliate.name, Affiliate.contract              FROM Affiliations JOIN Bank ON Bank.bank_id =                                 Affiliations.bank_id JOIN Affiliate ON Affiliate.affiliate_id =               Affiliations.affiliate_id GROUP BY Bank.name, Affiliate.name,                 Affiliate.contract LIMIT 10""")
+            query = ("""SELECT Bank.name, Affiliate.name, Affiliate.contract              FROM Affiliations JOIN Bank ON Bank.bank_id =                                 Affiliations.bank_id JOIN Affiliate ON Affiliate.affiliate_id =               Affiliations.affiliate_id WHERE Bank.bank_id = %s GROUP BY                     Bank.name, Affiliate.name, Affiliate.contract LIMIT 10""")
 
-            cursor.execute(query)
+            variables = (bank_id)
+            cursor.execute(query, variables)
 
             results = cursor.fetchall()
             cursor.close()
