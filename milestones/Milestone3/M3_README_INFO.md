@@ -2,10 +2,10 @@
 ## **Darren Wong**
 ### **918565679**
 
-###**[Discord Server Link]** https://discord.gg/3YsT5mkJun
-#### **[Repl Bot Invite Link]** https://replit.com/join/titlfjqygx-dawong15
+### **[Discord Server Link]** https://discord.gg/3YsT5mkJun
+### **[Repl Bot Invite Link]** https://replit.com/join/titlfjqygx-dawong15
 
-##### **[Commands]**
+## **[Commands]**
 
 1. /find_accounts <floor_balance> <threshold_balance(no balance)>
    Find all the accounts at or above a specified balance, with an optional threshold balance
@@ -75,7 +75,7 @@ e.g. /get_card_scanned 2022-05-14 2022-05-15
     Find all the devices made by a manufacturer and list when they were made
 e.g. /find_devices 4
   
-###### **[Business Rules/Requirements] **
+## **[Business Rules/Requirements] **
 1. Find all the accounts at or above a specified balance, with an optional threshold balance
 
 2. Find cards with expiration dates at a given year
