@@ -4,6 +4,7 @@
 
 import os
 import pymysql.cursors
+import datetime
 
 db_host = os.environ['DB_HOST']
 db_username = os.environ['DB_USER']
@@ -203,7 +204,7 @@ def find_machine_status(status_type):
         connection = connect()
         if connection:
             cursor = connection.cursor()
-            query = ("""SELECT Bank.bank_id, ATMMachine.atm_machine_id,                   ATMMachine.status FROM ATMMachine JOIN Bank ON ATMMachine.bank_id             = Bank.bank_id WHERE ATMMachine.status = %s GROUP BY                   Bank.bank_id, ATMMachine.atm_machine_id, ATMMachine.status""")
+            query = ("""SELECT Bank.name, ATMMachine.atm_machine_id,                      ATMMachine.status FROM ATMMachine JOIN Bank ON ATMMachine.bank_id             = Bank.bank_id WHERE ATMMachine.status = %s GROUP BY                          Bank.name, ATMMachine.atm_machine_id, ATMMachine.status""")
 
             variables = (status_type)
             cursor.execute(query, variables)
@@ -230,12 +231,19 @@ def get_logins(date):
         connection = connect()
         if connection:
             cursor = connection.cursor()
-            print("test")
-            query = ("""SELECT ATMMachine.atm_machine_id,                                 VerifiedUser.verified_user_id, Logins.logged_in FROM Logins JOIN              VerifiedUser ON VerifiedUser.verified_user_id =                               Logins.verified_user_id JOIN ATMMachine ON                                    ATMMachine.atm_machine_id = Logins.verified_user_id WHERE                     Logins.logged_in = "%s" GROUP BY                                              ATMMachine.atm_machine_id, VerifiedUser.verified_user_id,                     Logins.logged_in""")
+            
+            split_date = date.split("-")
+            year = int(split_date[0])
+            month = int(split_date[1])
+            day = int(split_date[2])
+
+            formatted_date = datetime.date(year, month, day)
+            
+            query = ("""SELECT ATMMachine.atm_machine_id,                                 VerifiedUser.verified_user_id, Logins.logged_in FROM Logins JOIN              VerifiedUser ON VerifiedUser.verified_user_id =                               Logins.verified_user_id JOIN ATMMachine ON                                    ATMMachine.atm_machine_id = Logins.verified_user_id WHERE                     Logins.logged_in = %s GROUP BY                                              ATMMachine.atm_machine_id, VerifiedUser.verified_user_id,                     Logins.logged_in""")
 
 
-            variables = (date)
-
+            variables = (formatted_date)
+            
             cursor.execute(query, variables)
             results = cursor.fetchall()
 
@@ -473,9 +481,16 @@ def get_verifications(date):
         connection = connect()
         if connection:
             cursor = connection.cursor()
-            query = ("""SELECT Verifies.verifies_id, Verifies.verified_at,                BankAccount.account_number FROM Verifies JOIN BankAccount ON                  BankAccount.bank_account_id = Verifies.bank_account_id WHERE                  Verifies.verified_at = "%s" GROUP BY                                          Verifies.verifies_id, Verifies.verified_at,                                   BankAccount.account_number""")
+    
+            split_date = date.split("-")
+            year = int(split_date[0])
+            month = int(split_date[1])
+            day = int(split_date[2])
 
-            variables = (date)
+            formatted_date = datetime.date(year, month, day)
+            query = ("""SELECT Verifies.verifies_id, Verifies.verified_at,                BankAccount.account_number FROM Verifies JOIN BankAccount ON                  BankAccount.bank_account_id = Verifies.bank_account_id WHERE                  Verifies.verified_at = %s GROUP BY                                          Verifies.verifies_id, Verifies.verified_at,                                   BankAccount.account_number""")
+
+            variables = (formatted_date)
             cursor.execute(query, variables)
 
             results = cursor.fetchall()
@@ -554,9 +569,23 @@ def get_card_scanned(start_date, end_date):
         connection = connect()
         if connection:
             cursor = connection.cursor()
-            query = ("""SELECT Scans.scans_id, Card.card_id, Scans.scanned                FROM Scans JOIN Card ON Card.card_id = Scans.card_id WHERE                    Scans.scanned BETWEEN "%s" AND "%s" GROUP BY                  Scans.scans_id, Card.card_id, Scans.scanned""")
+            print("t")
+            split_start_date = start_date.split("-")
+            start_year = int(split_start_date[0])
+            start_month = int(split_start_date[1])
+            start_day = int(split_start_date[2])
+            print("t1")
+            formatted_start_date = datetime.date(start_year, start_month,                 start_day)
+                        
+            split_end_date = end_date.split("-")
+            end_year = int(split_end_date[0])
+            end_month = int(split_end_date[1])
+            end_day = int(split_end_date[2])
 
-            variables = (start_date, end_date)
+            formatted_end_date = datetime.date(end_year, end_month, end_day)
+            query = ("""SELECT Scans.scans_id, Card.card_id, Scans.scanned                FROM Scans JOIN Card ON Card.card_id = Scans.card_id WHERE                    Scans.scanned BETWEEN %s AND %s GROUP BY                  Scans.scans_id, Card.card_id, Scans.scanned""")
+
+            variables = (formatted_start_date, formatted_end_date)
             cursor.execute(query, variables)
 
             results = cursor.fetchall()
