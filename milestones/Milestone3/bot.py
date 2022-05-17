@@ -13,8 +13,7 @@ import database as db
 # environment variables
 token = os.environ['DISCORD_TOKEN']
 server = os.environ['DISCORD_GUILD']
-server_id = os.environ['SERVER_ID']  # optional
-channel_id = os.environ['CHANNEL_ID']  # optional
+
 
 # database connection
 # secret keys related to your database must be updated. Otherwise, it won't work
@@ -49,8 +48,10 @@ async def on_message(message):
     else:
         # A message was send by the user.
         msg = message.content.lower()
-        if "milestone3" in msg:
-            response = "I am alive. Signed: 'your bot'"
+        # if "milestone3" in msg:
+        #     response = "I am alive. Signed: 'your bot'"
+        response = db.response(msg)
+        print(response)
     if response:
         # bot sends response to the Discord API and the response is show
         # on the channel from your Discord server that triggered this method.
@@ -65,3 +66,6 @@ except:
     print("Bot is offline because your secret environment variables are not set. Head to the left panel, " +
           "find the lock icon, and set your environment variables. For more details, read the README file in your " +
           "milestone 3 repository")
+my_secret = os.environ['DISCORD_TOKEN']
+
+
