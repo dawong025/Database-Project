@@ -1,9 +1,9 @@
 # **Milestone 3 Information**
-##**Darren Wong**
-##**918565679**
+## **Darren Wong**
+### **918565679**
 
-##**[Discord Server Link]** https://discord.gg/3YsT5mkJun
-##**[Repl Bot Invite Link]** https://replit.com/join/titlfjqygx-dawong15
+###**[Discord Server Link]** https://discord.gg/3YsT5mkJun
+### **[Repl Bot Invite Link]** https://replit.com/join/titlfjqygx-dawong15
 
 ##**[Commands]**
 
