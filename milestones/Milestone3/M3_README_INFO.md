@@ -7,10 +7,10 @@
 
 ## **[Commands]**
 
-1. ```/find_accounts <floor_balance> <threshold_balance(no balance)>```
-   Find all the accounts at or above a specified balance, with an optional threshold balance
-e.g. ```/find_accounts 500 1000```
-     ```/find_accounts 200 500```
+1. ```/find_accounts <floor_balance> <threshold_balance(no balance)>```\
+   Find all the accounts at or above a specified balance, with an optional threshold balance\
+e.g. ```/find_accounts 500 1000```\
+     ```/find_accounts 200 500```\
 
 2. ```/find_expiration <year>```
    Find cards with expiration dates at a given year
