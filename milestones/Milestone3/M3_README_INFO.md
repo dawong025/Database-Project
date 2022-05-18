@@ -7,7 +7,7 @@
 
 ## **[Commands]**
 
-1. ```/find_accounts <floor_balance> <threshold_balance(no balance)>```\
+1. ```/find_accounts <floor_balance> <threshold_balance>```\
    Find all the accounts at or above a specified balance, with an optional threshold balance\
 e.g. ```/find_accounts 500 1000```\
 e.g.```/find_accounts 200 500```
