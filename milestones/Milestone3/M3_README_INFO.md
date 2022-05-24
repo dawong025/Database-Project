@@ -18,8 +18,8 @@ e.g. ```/find_expiration 2022```
 
 3. ```/find_machine_status <status_type>```\
    Find all the machines with a given status\
-e.g. ```/find_machine_status "working"```\
-e.g. ```/find_machine_status "not_working"```
+e.g. ```/find_machine_statusworking```\
+e.g. ```/find_machine_status not_working```
 
 4. ```/get_logins <date>```\
    Get all the logins from a given date\
